@@ -30,15 +30,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if(Auth::user()->role == 1)
-        {
-            $request->validate([
-                'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-                'role' => ['required','string','in:2']
-            ]);
+        if(Auth::user()){
+            if(Auth::user()->role == 1)
+            {
+                $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                    'password' => ['required', 'confirmed', Rules\Password::defaults()],
+                    'role' => ['required','string','in:2']
+                ]);
+            }
         }
+        
         else
         {
             $request->validate([
@@ -56,11 +59,6 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
-
-
-        if(Auth::user()->role == 1){
-            
-        }
 
         event(new Registered($user));
 

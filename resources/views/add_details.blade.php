@@ -181,7 +181,7 @@
                                         <label for="address" class="col-md-4 col-lg-3 col-form-label">Salary</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="salary" type="text" class="form-control" id="address"
-                                                value="{{ $details ? $details->salary : '' }}" {{$details->salary ? 'readonly': ''}}>
+                                                value="{{ $details ? $details->salary : '' }}" @if ($details){{$details->salary ? 'readonly': ''}} @endif>
                                         </div>
                                     </div>
 

@@ -3,11 +3,18 @@
 @section('content')
 
 
-<form action="{{route('searchteacher')}}" method="post">
-  @csrf
-  <input type="text" placeholder="search teacher" name="search">
-  <button type="submit">search</button>
-</form>
+<div class="pagetitle d-flex justify-content-between">
+  <h1>Teacher List</h1>
+  <form action="{{route('searchteacher')}}" method="post">
+    @csrf
+    <div class="d-flex">
+    <input class="form-control " type="text" placeholder="search teacher" name="search">
+    <button type="submit" class="btn btn-primary">search</button>
+  </div>
+  </form>
+</div>
+
+
 <table class="table">
     <thead>
       <tr>
